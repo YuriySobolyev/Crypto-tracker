@@ -2,7 +2,8 @@ import {createContext, useState} from "react";
 import API from "../API";
 
 const DEFAULT_INTERVAL = "1D";
-const INTERVALS = {
+export const INTERVALS = {
+    "1H": 1,
     "1D": 1,
     "1W": 7,
     "1M": 30,

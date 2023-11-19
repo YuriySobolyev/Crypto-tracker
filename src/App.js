@@ -18,9 +18,9 @@ function App() {
         <div className="App">
             <Header/>
             <Crypto/>
-            <Routes>
-                <Route path="/" element={<Crypto/>}/>
-            </Routes>
+            {/*<Routes>*/}
+            {/*    <Route path="/" element={<Crypto/>}/>*/}
+            {/*</Routes>*/}
         </div>
     );
 }

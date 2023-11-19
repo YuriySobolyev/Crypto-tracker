@@ -5,11 +5,12 @@
   justify-content: space-between;
   width: 100%;
   align-items: center;
-  padding: 1em;
+  padding: .4em 1em;
   gap: 2em;
-  margin-bottom: 1em;
+  margin-bottom: .5em;
   border: 2px solid $base-border;
-  border-radius: 1em;
+  border-radius: .5em;
+  background: $base-color;
 }
 
 .logo {
