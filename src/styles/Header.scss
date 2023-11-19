@@ -1,0 +1,21 @@
+@import "_config.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding: 1em;
+  gap: 2em;
+  margin-bottom: 1em;
+  border: 2px solid $base-border;
+  border-radius: 1em;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  background: $secondary-color url("../logo.svg") no-repeat center/cover;
+  border-radius: 50%;
+
+}
