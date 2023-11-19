@@ -1,0 +1,17 @@
+@import "_config.scss";
+
+.main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section {
+  width: 100%;
+  display: flex;
+  padding: .5em;
+  background: $base-color;
+  margin: .5em;
+  border-radius: .5em;
+}
