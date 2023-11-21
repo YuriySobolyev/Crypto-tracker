@@ -6,14 +6,16 @@ const cryptoListContext = createContext({})
 export const CryptoListProvider = (props) => {
     const [cryptoList, setCryptoList] = useState([]);
 
-    const getCryptoList = async () => {
-        API.get("/assets").then((response) => {
-            setCryptoList(response.data.data)
-        }).catch((error) => {
-            setCryptoList([])
-            console.log(error)
-        })
-    }
+    const getCryptoList = () => {
+        API.get("/assets")
+            .then((res) => {
+                setCryptoList(res.data.data);
+            })
+            .catch((error) => {
+                setCryptoList([])
+                console.log(error);
+            });
+    };
 
     const values = {
         cryptoList: cryptoList,
@@ -21,8 +23,8 @@ export const CryptoListProvider = (props) => {
     }
     return (
         <cryptoListContext.Provider value={values}>
-        {props.children}
-    </cryptoListContext.Provider>
+            {props.children}
+        </cryptoListContext.Provider>
     );
 }
 

@@ -3,7 +3,6 @@ import API from "../API";
 
 const DEFAULT_INTERVAL = "1D";
 export const INTERVALS = {
-    "1H": 1,
     "1D": 1,
     "1W": 7,
     "1M": 30,
@@ -19,7 +18,7 @@ export const SelectedCryptoProvider = (props) => {
     const [id, setId] = useState(null);
 
     const getCryptoHistory = async (id, interval = selectedInterval) => {
-        const interval_ = interval === DEFAULT_INTERVAL ? "h2" : "d1";
+        const interval_ = interval === DEFAULT_INTERVAL ? "h1" : "d1";
         const start = new Date();
         start.setDate(start.getDate() - INTERVALS[interval]);
         const end = new Date();
@@ -33,7 +32,7 @@ export const SelectedCryptoProvider = (props) => {
     const values = {
         history: history,
         getHistory: getCryptoHistory,
-        selectedId: id,
+        selected_id: id,
         interval: selectedInterval,
     };
 
