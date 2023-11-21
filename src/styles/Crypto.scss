@@ -1,39 +1,106 @@
 @import "_config.scss";
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
-  padding: .4em;
-  margin-bottom: .5em;
-  border-radius: .5em;
-  background: $base-color;
-    img {
-      width: 40px;
-    };
-}
 
 .main {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-section {
   width: 100%;
-  //display: flex;
-  padding: .5em;
-  background: $base-color;
-  margin: .5em;
-  border-radius: .5em;
-}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-.chart-container {
+  section {
     width: 100%;
-  height: 40vh;
-}
+    padding: .5em;
+    background: $base-color;
+    margin-bottom: .5em;
+    border-radius: .5em;
 
-.chartLine {
+    .header {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+      padding: .4em;
+      margin-bottom: .5em;
+      border-radius: .5em;
+      background: $base-color;
+      img {
+        width: 40px;
+      }
+    }
+
+    .chart-container {
+      width: 100%;
+      height: 40vh;
+      margin-bottom: .5em;
+    }
+
+    .crypto_intervals {
+      width: 100%;
+      display: flex;
+      gap: .5em;
+      margin-bottom: .5em;
+      //align-items: center;
+      .interval-btn {
+        width: 25px;
+        padding: .2em;
+        border-radius: .5em;
+        background: $base-color;
+        cursor: pointer;
+        color: $font-color;
+        font-size: 10px;
+        outline: none;
+        border: 1px solid lighten($base-color, 10);
+        transition: all .5s;
+        &:hover, &:focus, &.active {
+            background: $secondary-color;
+        }
+      }
+    }
+  }
+  .search {
+      position: relative;
+    input {
+      width: 100%;
+      padding: .5em;
+      border-radius: .5em;
+      border: 1px solid lighten($base-color, 10);
+      outline: none;
+      background: $base-color;
+      color: $font-color;
+      font-size: 14px;
+      transition: all .5s;
+
+      &:focus {
+        border: 1px solid $secondary-color;
+      }
+    }
+      .suggestion {
+        position: absolute;
+        top: 2.5em;
+        left: 0;
+        /* width: 100%; */
+        background: #0c0c0c;
+        border-radius: 0.5em;
+        border: 1px solid #262626;
+        padding: 0.5em;
+        margin: 0.5em;
+        z-index: 1;
+
+        li {
+          cursor: pointer;
+          padding: .5em;
+          color: $font-color;
+          transition: all .5s;
+          font-size: 18px;
+          list-style: none;
+
+          &:hover, &:focus {
+            background: $secondary-color;
+            color: darken($font-color, 10);
+            border-radius: .5em;
+          }
+        }
+      }
+
+  }
 }

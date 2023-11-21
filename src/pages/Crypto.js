@@ -30,11 +30,6 @@ const Crypto = () => {
             return symbolMatches || nameMatches;
         });
 
-        // if (matched.length > 5 && event.target.value !== '') {
-        //     matched = matched.slice(0, 5);
-        // } else if (event.target.value === '') {
-        //     matched = [];
-        // }
         if (event.target.value === ""){
             matched = []
         }else if(matched.length > 5){
@@ -67,7 +62,7 @@ const Crypto = () => {
                 placeholder='Search...'
                 value={searhPhrase}
                 onChange={onSearchPhraseChange}
-            />{suggestions.length > 0 && <ul>
+            />{suggestions.length > 0 && <ul className="suggestion">
             {suggestions.map(crypto => <li
                 key={crypto.id}
                 onClick={() => selectedSearchedCrypto(crypto.id)}
@@ -81,7 +76,7 @@ const Crypto = () => {
                        labels={generateLabels()}
                        selectedCrypto={cryptos.find(crypto => crypto.id === ctx.selected_id)}
             />
-            <div className='crypto_cart'>
+            <div className='crypto_intervals'>
                 {Object.keys(INTERVALS).map((interval) => (
                     <button className={`interval-btn ${interval === ctx.interval && "active"}`}
                             onClick={() => {
@@ -91,6 +86,11 @@ const Crypto = () => {
                     >
                         {interval}
                     </button>))}
+            </div>
+        </section>
+        <section>
+            <div className="title">
+                <h3>Top Coins</h3>
             </div>
         </section>
     </main>);

@@ -45,7 +45,7 @@ const OPTIONS = {
             },
             grid: {
                 display: true,
-                color: 'rgba(255,255,255,0.15)',
+                color: 'rgba(255,255,255,0.05)',
             },
         },
         x: {
@@ -57,7 +57,7 @@ const OPTIONS = {
             },
             grid: {
                 display: true,
-                color: 'rgba(255,255,255,0.15)',
+                color: 'rgba(255,255,255,0.05)',
             },
         },
     },
@@ -107,13 +107,13 @@ export const LineChart = ({data, labels, selectedCrypto}) => {
     return (
         <div className="lineChart">
             <div className="header">
+                <h3>
+                    {selectedCrypto.name}({selectedCrypto.symbol})
+                </h3>
                 <img
                     src={`https://assets.coincap.io/assets/icons/${selectedCrypto.symbol.toLowerCase()}@2x.png`}
                     alt="Crypto_img"
                 />
-                <h3>
-                    {selectedCrypto.name}({selectedCrypto.symbol})
-                </h3>
                 <div className="price">
                     <h3 style={{color: priceColor}}>
                         $ {Math.round(selectedCrypto.priceUsd * 100) / 100} {arrowIcon}
@@ -121,7 +121,7 @@ export const LineChart = ({data, labels, selectedCrypto}) => {
                 </div>
             </div>
             <div className="chart-container">
-                <Line className="chartLine" options={OPTIONS} data={chartData}/>
+                <Line options={OPTIONS} data={chartData}/>
             </div>
         </div>
     );
