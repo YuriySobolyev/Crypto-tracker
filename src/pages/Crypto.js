@@ -3,6 +3,7 @@ import selectedCryptoContext, {INTERVALS} from "../store/selectedCryptoContext";
 import cryptoListContext from "../store/cryptoListContext";
 import "../styles/Crypto.scss";
 import LineChart from "../component/LineChart";
+import CryptoTable from "../component/CryptoTable";
 
 const OPTIONS_HOUR_MINUTE = {
     hour: 'numeric', minute: 'numeric',
@@ -91,6 +92,8 @@ const Crypto = () => {
         <section>
             <div className="title">
                 <h3>Top Coins</h3>
+                <p>Top 5 Cryptos by Market Cap</p>
+                <CryptoTable/>
             </div>
         </section>
     </main>);
