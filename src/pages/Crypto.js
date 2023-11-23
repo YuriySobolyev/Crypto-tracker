@@ -90,11 +90,10 @@ const Crypto = () => {
             </div>
         </section>
         <section>
-            <div className="title">
+            <div className="crypto_table-title">
                 <h3>Top Coins</h3>
-                <p>Top 5 Cryptos by Market Cap</p>
-                <CryptoTable/>
             </div>
+                <CryptoTable/>
         </section>
     </main>);
 };

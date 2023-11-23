@@ -76,6 +76,10 @@
         }
       }
     }
+
+    .crypto_table-title h3 {
+      padding-bottom: 1em;
+    }
   }
 
   .search {
@@ -96,6 +100,7 @@
         color: $font-color;
         transition: opacity .5s;
       }
+
       &:focus::placeholder {
         opacity: .5;
       }
@@ -134,13 +139,17 @@
     }
 
   }
+
   .crypto_table {
     list-style: none;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    li {
+    color: $font-color;
+    font-size: 14px;
+
+    li.crypto_table_item, li.crypto_table_header {
       width: 100%;
       display: flex;
       justify-content: space-between;
@@ -149,13 +158,57 @@
       margin-bottom: .5em;
       border-radius: .5em;
       background: $base-color;
-      color: $font-color;
-      font-size: 14px;
       cursor: pointer;
+      position: relative;
+
+      .symbol {
+        font-size: 12px;
+      }
+
+      .crypto_table_header__symbol {
+        width: 33.333%;
+        text-align: left;
+      }
+
+      .crypto_table_header__price, .crypto_table_item__price {
+        width: 33.333%;
+        text-align: center;
+      }
+
+      .crypto_table_header__change, .crypto_table_item__change {
+        width: 33.333%;
+        text-align: right;
+      }
+
       img {
         width: 20px;
+        position: absolute;
+      }
 
+      .crypto_table_item-name {
+        width: 33.333%;
+        text-align: left;
+        padding-left: 2em;
       }
     }
   }
+}
+
+@media (max-width: $width_mobile) {
+  .main {
+    padding: 0;
+
+    section {
+      margin-bottom: 0;
+      border-radius: 0;
+
+      .header .crypto_img img {
+        width: 25px;
+      }
+    }
+    .crypto_table {
+        font-size: 12px;
+    }
+  }
+
 }

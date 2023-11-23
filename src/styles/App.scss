@@ -10,6 +10,9 @@
 html {
   scroll-behavior: smooth;
 }
+ul, li {
+  list-style: none;
+}
 
 body {
   background: $body-color;
@@ -37,4 +40,23 @@ body {
 h3 {
   color: $font-color;
   font-size: 16px;
+}
+
+@media (max-width: $width_mobile) {
+  .App {
+    padding: 0;
+  }
+
+  h3 {
+    font-size: 14px;
+  }
+
+  main {
+    padding: 0;
+    section {
+        margin-bottom: 0;
+      border-radius: 0;
+    }
+  }
+
 }
