@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React, {useContext} from 'react';
 import selectedCryptoContext from "../store/selectedCryptoContext.jsx";
 import cryptoListContext from "../store/cryptoListContext.jsx";
@@ -12,7 +11,7 @@ function CryptoTable() {
             <li className="crypto_table_header">
                 <span className="crypto_table_header__symbol">Coin</span>
                 <span className="crypto_table_header__price">Price</span>
-                <span className="crypto_table_header__change">24Hr) %</span>
+                <span className="crypto_table_header__change">24Hr %</span>
             </li>
             {cryptoList.slice(0, 10).map((crypto) => (
                 <li className="crypto_table_item" key={crypto.id} onClick={() => getHistory(crypto.id)}>

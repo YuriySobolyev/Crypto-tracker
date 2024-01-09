@@ -224,7 +224,13 @@ export const LineChart = ({ data, labels, selectedCrypto }) => {
             </div>
             <div className="chart-container">
                 <Line options={OPTIONS} data={chartData} />
+            <div className="chart-container_bg">
+            <img
+                        src={`https://assets.coincap.io/assets/icons/${selectedCrypto.symbol.toLowerCase()}@2x.png`}
+                        alt="Crypto_img"
+                    />
             </div>
+            </div>           
         </div>
     );
 };
