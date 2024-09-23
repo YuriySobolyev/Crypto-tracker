@@ -16,5 +16,26 @@
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "screenshots": [
+    {
+      "src": "/screenshots/Crypto_tracker-mobile.png",
+      "type": "image/png",
+      "sizes": "396x717",
+      "label": "Mobile view"
+    },
+    {
+      "src": "/screenshots/Crypto_tracker-ipad.png",
+      "type": "image/png",
+      "sizes": "768x878",
+      "label": "Tablet view"
+    },
+    {
+      "src": "/screenshots/Crypto_tracker-pc.png",
+      "type": "image/png",
+      "sizes": "1920x1177",
+      "label": "Main view",
+      "form_factor": "wide"
+    }
+  ]
 }
