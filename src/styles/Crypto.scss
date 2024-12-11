@@ -21,7 +21,7 @@
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
 
-    .header {
+    .header, .header_info {
       display: flex;
       justify-content: space-between;
       width: 100%;
@@ -40,13 +40,21 @@
         width: 40%;
         text-align: right;
       }
+      .crypto_info{
+        p {
+          font-size: 12px;
+        }
+      }
 
       .crypto_img {
         width: 20%;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         img {
           width: 40px;
+          border-radius: 5px;
         }
       }
     }
@@ -190,6 +198,11 @@
         font-size: 12px;
       }
 
+      .crypto_table_header__rank, .crypto_table_item-rank {
+        width: 24px;
+        text-align: center;
+      }
+
       .crypto_table_header__symbol {
         width: 33.333%;
         text-align: left;
@@ -208,6 +221,7 @@
       img {
         width: 20px;
         position: absolute;
+        margin-left: 25px;
       }
 
       .crypto_table_item-name {
@@ -217,6 +231,32 @@
       }
     }
   }
+
+.show_more_button {
+  display: flex;
+  margin: 20px auto 0 auto;
+  padding: 10px 20px;
+  background-color: #1f004c;
+  color: #cccccc;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  justify-content: center;
+}
+
+.show_more_button:hover {
+  background-color: rgba(31, 0, 76, 0.8);
+  color: #ffffff;
+}
+
+@media (max-width: $width_tablet) {
+  .show_more_button {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
 
 
 @media (max-width: $width_mobile) {

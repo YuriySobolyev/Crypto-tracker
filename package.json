@@ -1,5 +1,5 @@
 {
-  "name": "crypto_tracker_vite",
+  "name": "crypto_tracker",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -20,10 +20,13 @@
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@vitejs/plugin-react": "^4.2.0",
+    "audit": "^0.0.6",
     "eslint": "^8.53.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
+    "fix": "^0.0.3",
+    "npm": "^10.8.3",
     "sass": "^1.69.5",
     "vite": "^5.0.5"
   }
