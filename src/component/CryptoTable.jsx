@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import selectedCryptoContext from "../store/selectedCryptoContext.jsx";
 import cryptoListContext from "../store/cryptoListContext.jsx";
+import { useFavoriteCrypto } from "../store/favoriteCryptoContext";
 
 function CryptoTable() {
     const { cryptoList } = useContext(cryptoListContext);
@@ -38,6 +39,9 @@ function CryptoTable() {
     const showMore = () => {
         setVisibleCount((prevCount) => prevCount + 10);
     };
+
+    // favorites
+    const { favorites, toggleFavorite, isFavorite } = useFavoriteCrypto();
 
     return (
         <div>
@@ -89,7 +93,28 @@ function CryptoTable() {
                                 {crypto.changePercent24Hr > 0 ? "↗" : "↘"}{" "}
                                 {Math.round(crypto.changePercent24Hr * 100) / 100} &nbsp;%
                             </li>
+                            <li>
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // чтобы не срабатывал onClick родителя
+                                        toggleFavorite(crypto.id);
+                                    }}
+                                    className="favorite-button"
+                                    style={{
+                                        background: "none",
+                                        border: "none",
+                                        fontSize: "1rem",
+                                        cursor: "pointer",
+                                        color: isFavorite(crypto.id) ? "gold" : "#ccc",
+                                    }}
+                                    title="Toggle favorite"
+                                >
+                                    {isFavorite(crypto.id) ? "★" : "☆"}
+                                </button>
+                            </li>
                         </ul>
+
+
                     </li>
                 ))}
             </ul>

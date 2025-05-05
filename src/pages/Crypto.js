@@ -1,3 +1,4 @@
+// src/pages/Crypto.js
 import React, {useContext, useState} from 'react';
 import selectedCryptoContext, {INTERVALS} from "../store/selectedCryptoContext";
 import cryptoListContext from "../store/cryptoListContext";
@@ -20,7 +21,7 @@ const OPTIONS_MONTH_YEAR = {
 const Crypto = () => {
     const ctx = useContext(selectedCryptoContext);
     const cryptos = useContext(cryptoListContext).cryptoList;
-    const [searhPhrase, setSearchPhrase] = useState('');
+    const [searchPhrase, setSearchPhrase] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const onSearchPhraseChange = (event) => {
         setSearchPhrase(event.target.value);
@@ -46,7 +47,7 @@ const Crypto = () => {
     };
 
     const generateLabels = () => {
-        let options =  ctx.interval === '1D' ? OPTIONS_HOUR_MINUTE : ctx.interval === '1W' || '1M' ? OPTIONS_MONTH_DAY : OPTIONS_MONTH_YEAR;
+        let options =  ctx.interval === '1D' ? OPTIONS_HOUR_MINUTE : (ctx.interval === '1W' || ctx.interval === '1M') ? OPTIONS_MONTH_DAY : OPTIONS_MONTH_YEAR;
         return ctx.history.map(item => {
             const date = new Date(item.date);
             return date.toLocaleString(
@@ -61,7 +62,7 @@ const Crypto = () => {
             <input
                 type='text'
                 placeholder='Search...'
-                value={searhPhrase}
+                value={searchPhrase}
                 onChange={onSearchPhraseChange}
             />{suggestions.length > 0 && <ul className="suggestion">
             {suggestions.map(crypto => <li
@@ -93,9 +94,9 @@ const Crypto = () => {
             <div className="crypto_table-title">
                 <h3>Top Coins</h3>
             </div>
-                <CryptoTable/>
+            <CryptoTable/>
         </section>
     </main>);
 };
 
-export default Crypto
+export default Crypto;

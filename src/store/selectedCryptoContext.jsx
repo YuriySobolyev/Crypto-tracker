@@ -1,3 +1,4 @@
+// src/store/selectedCryptoContext.jsx
 import {createContext, useState} from "react";
 import API from "../API.jsx";
 
@@ -6,11 +7,11 @@ export const INTERVALS = {
     "1D": 1,
     "1W": 7,
     "1M": 30,
-    "6M": 90,
+    "6M": 180,
     "1Y": 365,
 };
 
-const selectedCryptoContext = createContext({})
+const selectedCryptoContext = createContext({});
 
 export const SelectedCryptoProvider = (props) => {
     const [history, setHistory] = useState([]);
@@ -43,4 +44,4 @@ export const SelectedCryptoProvider = (props) => {
     );
 };
 
-export default selectedCryptoContext
+export default selectedCryptoContext;

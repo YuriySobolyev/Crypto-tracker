@@ -18,8 +18,8 @@
     //backdrop-filter: blur(5px);
     background: no-repeat center center;
     background-size: cover;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.75);
 
     .header, .header_info {
       display: flex;
@@ -216,6 +216,13 @@
       .crypto_table_header__change, .crypto_table_item__change {
         width: 33.333%;
         text-align: right;
+      }
+
+      .crypto_table_item__change {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: .5em;
       }
 
       img {
