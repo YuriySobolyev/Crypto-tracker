@@ -1,12 +1,15 @@
-import {SelectedCryptoProvider} from "./selectedCryptoContext.jsx";
-import {CryptoListProvider} from "./cryptoListContext.jsx";
+import { SelectedCryptoProvider } from "./selectedCryptoContext.jsx";
+import { CryptoListProvider } from "./cryptoListContext.jsx";
+import { FavoriteCryptoProvider } from "./favoriteCryptoContext.jsx";
 
-export default function store(props) {
+export default function Store(props) {
     return (
-        <CryptoListProvider>
-            <SelectedCryptoProvider>
-                {props.children}
-            </SelectedCryptoProvider>
-        </CryptoListProvider>
-    )
+        <FavoriteCryptoProvider>
+            <CryptoListProvider>
+                <SelectedCryptoProvider>
+                    {props.children}
+                </SelectedCryptoProvider>
+            </CryptoListProvider>
+        </FavoriteCryptoProvider>
+    );
 }

@@ -3,31 +3,46 @@ import { createContext, useContext, useEffect, useState } from "react";
 const FavoriteCryptoContext = createContext();
 
 export const FavoriteCryptoProvider = ({ children }) => {
-    const [favorites, setFavorites] = useState([]);
+    const [favorites, setFavorites] = useState(() => {
+        const saved = localStorage.getItem("favorites");
+        return saved ? JSON.parse(saved) : [];
+    });
 
-    // Загрузка из localStorage при инициализации
+
     useEffect(() => {
-        const stored = localStorage.getItem("favorites");
-        if (stored) {
-            setFavorites(JSON.parse(stored));
+        try {
+            const stored = localStorage.getItem("favorites");
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                if (Array.isArray(parsed)) {
+                    setFavorites(parsed.filter(id => typeof id === "string"));
+                } else {
+                    localStorage.removeItem("favorites");
+                }
+            }
+        } catch (e) {
+            console.error("Ошибка загрузки избранных:", e);
+            localStorage.removeItem("favorites");
         }
     }, []);
 
-    // Сохранение в localStorage при изменении
     useEffect(() => {
         localStorage.setItem("favorites", JSON.stringify(favorites));
     }, [favorites]);
 
     const toggleFavorite = (id) => {
+        if (!id || typeof id !== "string") return;
         setFavorites((prev) =>
-            prev.includes(id) ? prev.filter((coin) => coin !== id) : [...prev, id]
+            prev.includes(id) ? prev.filter(coin => coin !== id) : [...prev, id]
         );
     };
 
     const isFavorite = (id) => favorites.includes(id);
 
     return (
-        <FavoriteCryptoContext.Provider value={{ favorites, toggleFavorite, isFavorite }}>
+        <FavoriteCryptoContext.Provider
+            value={{ favorites, toggleFavorite, isFavorite }}
+        >
             {children}
         </FavoriteCryptoContext.Provider>
     );

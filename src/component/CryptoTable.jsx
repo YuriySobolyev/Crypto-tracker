@@ -1,33 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, {useState, useContext} from "react";
 import selectedCryptoContext from "../store/selectedCryptoContext.jsx";
 import cryptoListContext from "../store/cryptoListContext.jsx";
-import { useFavoriteCrypto } from "../store/favoriteCryptoContext";
+import {useFavoriteCrypto} from "../store/favoriteCryptoContext";
 
-function CryptoTable() {
-    const { cryptoList } = useContext(cryptoListContext);
-    const { getHistory } = useContext(selectedCryptoContext);
+function CryptoTable({showOnlyFavorites, activeTab, selectedId, onSelect}) {
+    const {cryptoList} = useContext(cryptoListContext);
+    const {getHistory} = useContext(selectedCryptoContext);
+    const {toggleFavorite, isFavorite} = useFavoriteCrypto();
 
-    // Состояние для отслеживания количества отображаемых элементов
     const [visibleCount, setVisibleCount] = useState(10);
+    const [sortConfig, setSortConfig] = useState({key: "rank", direction: "asc"});
 
-    // Состояние для текущего критерия сортировки
-    const [sortConfig, setSortConfig] = useState({ key: "rank", direction: "asc" });
-
-    // Функция для сортировки массива
-    const sortedCryptoList = [...cryptoList].sort((a, b) => {
-        const aValue = sortConfig.key === "rank" ? parseInt(a[sortConfig.key]) : a[sortConfig.key];
-        const bValue = sortConfig.key === "rank" ? parseInt(b[sortConfig.key]) : b[sortConfig.key];
-
-        if (aValue < bValue) {
-            return sortConfig.direction === "asc" ? -1 : 1;
-        }
-        if (aValue > bValue) {
-            return sortConfig.direction === "asc" ? 1 : -1;
-        }
-        return 0;
-    });
-
-    // Функция для изменения критерия сортировки
     const handleSort = (key) => {
         setSortConfig((prevConfig) => ({
             key,
@@ -35,16 +18,25 @@ function CryptoTable() {
         }));
     };
 
-    // Функция для показа больше элементов
     const showMore = () => {
         setVisibleCount((prevCount) => prevCount + 10);
     };
 
-    // favorites
-    const { favorites, toggleFavorite, isFavorite } = useFavoriteCrypto();
+    const filteredList = showOnlyFavorites
+        ? cryptoList.filter((crypto) => isFavorite(crypto.id))
+        : cryptoList;
+
+    const sortedCryptoList = [...filteredList].sort((a, b) => {
+        const aValue = sortConfig.key === "rank" ? parseInt(a[sortConfig.key]) : a[sortConfig.key];
+        const bValue = sortConfig.key === "rank" ? parseInt(b[sortConfig.key]) : b[sortConfig.key];
+
+        if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
+        if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
+        return 0;
+    });
 
     return (
-        <div>
+        <div className="crypto_table-wrapper" key={activeTab}>
             <ul className="crypto_table">
                 <li className="crypto_table_header">
                     <span className="crypto_table_header__rank" onClick={() => handleSort("rank")}>
@@ -60,17 +52,19 @@ function CryptoTable() {
                         24Hr % {sortConfig.key === "changePercent24Hr" && (sortConfig.direction === "asc" ? "↑" : "↓")}
                     </span>
                 </li>
+
                 {sortedCryptoList.slice(0, visibleCount).map((crypto) => (
                     <li
-                        className="crypto_table_item"
+                        className={`crypto_table_item ${selectedId === crypto.id ? "selected" : ""}`}
                         key={crypto.id}
                         onClick={() => {
+                            onSelect(crypto.id);
                             getHistory(crypto.id);
-                            window.scrollTo({ top: 0, behavior: "smooth" });
+                            window.scrollTo({top: 0, behavior: "smooth"});
                         }}
                     >
                         <ul className="crypto_table_item-rank">
-                            <li>{parseInt(crypto.rank)}</li> {/* Преобразование rank в число */}
+                            <li>{parseInt(crypto.rank)}</li>
                         </ul>
                         <img
                             src={`https://assets.coincap.io/assets/icons/${crypto.symbol.toLowerCase()}@2x.png`}
@@ -96,7 +90,7 @@ function CryptoTable() {
                             <li>
                                 <button
                                     onClick={(e) => {
-                                        e.stopPropagation(); // чтобы не срабатывал onClick родителя
+                                        e.stopPropagation();
                                         toggleFavorite(crypto.id);
                                     }}
                                     className="favorite-button"
@@ -113,13 +107,11 @@ function CryptoTable() {
                                 </button>
                             </li>
                         </ul>
-
-
                     </li>
                 ))}
             </ul>
-            {/* Кнопка для показа больше */}
-            {visibleCount < cryptoList.length && (
+
+            {visibleCount < filteredList.length && (
                 <button onClick={showMore} className="show_more_button">
                     Show More
                 </button>

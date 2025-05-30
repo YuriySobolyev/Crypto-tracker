@@ -1,5 +1,4 @@
-// src/store/selectedCryptoContext.jsx
-import {createContext, useState} from "react";
+import { createContext, useState, useEffect } from "react";
 import API from "../API.jsx";
 
 const DEFAULT_INTERVAL = "1D";
@@ -16,24 +15,46 @@ const selectedCryptoContext = createContext({});
 export const SelectedCryptoProvider = (props) => {
     const [history, setHistory] = useState([]);
     const [selectedInterval, setInterval] = useState(DEFAULT_INTERVAL);
-    const [id, setId] = useState(null);
+    const [selectedIds, setSelectedIds] = useState({
+        all: null,
+        favorites: null
+    });
 
-    const getCryptoHistory = async (id, interval = selectedInterval) => {
-        const interval_ = interval === DEFAULT_INTERVAL ? "h1" : "d1";
+    useEffect(() => {
+        const savedIds = localStorage.getItem("selectedIds");
+        if (savedIds) setSelectedIds(JSON.parse(savedIds));
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("selectedIds", JSON.stringify(selectedIds));
+    }, [selectedIds]);
+
+    const getCryptoHistory = async (cryptoId, interval = selectedInterval, tab = "all") => {
+        if (!cryptoId) return;
+
+        const intervalKey = interval === DEFAULT_INTERVAL ? "h1" : "d1";
         const start = new Date();
         start.setDate(start.getDate() - INTERVALS[interval]);
         const end = new Date();
-        const url = `/assets/${id}/history?interval=${interval_}&start=${start.getTime()}&end=${end.getTime()}`;
-        const response = await API.get(url);
-        setHistory(response.data.data);
-        setId(id);
-        setInterval(interval);
-    }
+        const url = `/assets/${cryptoId}/history?interval=${intervalKey}&start=${start.getTime()}&end=${end.getTime()}`;
+
+        try {
+            const response = await API.get(url);
+            setHistory(response.data.data);
+            setInterval(interval);
+            setSelectedIds(prev => ({
+                ...prev,
+                [tab]: cryptoId
+            }));
+        } catch (e) {
+            console.error("Ошибка загрузки истории:", e);
+        }
+    };
 
     const values = {
-        history: history,
+        history,
         getHistory: getCryptoHistory,
-        selected_id: id,
+        selectedIds,
         interval: selectedInterval,
     };
 
@@ -43,5 +64,6 @@ export const SelectedCryptoProvider = (props) => {
         </selectedCryptoContext.Provider>
     );
 };
+
 
 export default selectedCryptoContext;

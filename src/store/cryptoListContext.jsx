@@ -1,7 +1,7 @@
-import {createContext, useState} from "react";
+import { createContext, useState } from "react";
 import API from "../API.jsx";
 
-const cryptoListContext = createContext({})
+const cryptoListContext = createContext({});
 
 export const CryptoListProvider = (props) => {
     const [cryptoList, setCryptoList] = useState([]);
@@ -12,7 +12,7 @@ export const CryptoListProvider = (props) => {
                 setCryptoList(res.data.data);
             })
             .catch((error) => {
-                setCryptoList([])
+                setCryptoList([]);
                 console.log(error);
             });
     };
@@ -20,12 +20,13 @@ export const CryptoListProvider = (props) => {
     const values = {
         cryptoList: cryptoList,
         getCryptoList: getCryptoList,
-    }
+    };
+
     return (
         <cryptoListContext.Provider value={values}>
             {props.children}
         </cryptoListContext.Provider>
     );
-}
+};
 
-export default cryptoListContext
+export default cryptoListContext;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
+import {Line} from 'react-chartjs-2';
 import {
     CategoryScale,
     Chart as ChartJS,
@@ -75,7 +75,7 @@ const determineColors = (data, useTransparentColors) => {
     return gradientColors;
 };
 
-export const LineChart = ({ data, labels, selectedCrypto }) => {
+export const LineChart = ({data, labels, selectedCrypto}) => {
     if (!selectedCrypto) {
         return null;
     }
@@ -115,15 +115,18 @@ export const LineChart = ({ data, labels, selectedCrypto }) => {
         return `$${scaled.toFixed(2)}${suffix}`; // Возвращаем форматированное значение
     }
 
+    const today = new Date().toLocaleDateString('en-US', {
+        // weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+    });
 
     return (
         <div className="lineChart">
             <div className="header">
-                <div className="crypto_name">
-                    <h3>
-                        #{selectedCrypto.rank} {selectedCrypto.name}({selectedCrypto.symbol})
-                    </h3>
-                </div>
                 <div className="crypto_img">
                     <a href={selectedCrypto.site} target="_blank">
                         <img
@@ -131,6 +134,11 @@ export const LineChart = ({ data, labels, selectedCrypto }) => {
                             alt="Crypto_img"
                         />
                     </a>
+                </div>
+                <div className="crypto_name">
+                    <h3 style={{color: priceColor}}>
+                        #{selectedCrypto.rank} {selectedCrypto.name}({selectedCrypto.symbol})
+                    </h3>
                 </div>
                 <div className="crypto_price">
                     <h3 style={{color: priceColor}}>
@@ -140,6 +148,12 @@ export const LineChart = ({ data, labels, selectedCrypto }) => {
             </div>
             <div className="header_info">
                 <div className="crypto_info">
+                    <p>
+                        Data updated - {today}
+                    </p>
+                    <p>
+                        Price - $ {Math.round(selectedCrypto.priceUsd * 100) / 100}
+                    </p>
                     <p>
                         Market Cap - {formatLargeNumber(selectedCrypto.marketCapUsd)}
                     </p>

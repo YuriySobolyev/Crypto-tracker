@@ -1,8 +1,12 @@
 $body-color: #000;
 $base-color: #0c0c0c;
+$section-color: rgba(12, 12, 12, 0.6);
 $secondary-color: linear-gradient( 180.4deg,  rgba(9,30,61,1) 45.3%, rgb(14,8,105) 279% );
 $font-color: #cccccc;
 $base-border: #4f69be;
+$base-hover: #aaa8d9;
+
+$section-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
 
 $gradient-blue:linear-gradient(129deg, #4EAAEB 19.22%, #3678E0 74.24%);
 $gradient-green:linear-gradient(129deg, #3CC8C8 19.22%, #0D9090 70.97%);
@@ -10,3 +14,18 @@ $gradient-bl:linear-gradient(129deg, #131313 19.22%, #032121 70.97%);
 
 $width_mobile: 425px;
 $width_tablet: 1024px;
+
+$base-padding: .5em;
+
+$transition: all .5s ease-in-out;
+
+$width100: 100%;
+$width90: 90%;
+$width80: 80%;
+$width70: 70%;
+$width60: 60%;
+$width50: 50%;
+$width40: 40%;
+$width30: 33.33%;
+$width20: 20%;
+$width10: 10%;
