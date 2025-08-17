@@ -141,7 +141,11 @@ const Crypto = () => {
                         }}
                         style={{ cursor: "pointer" }}
                     >
-                        Favorites ★
+                        {/*Favorites ★*/}
+                        Favorites
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 32 32">
+                            <path fill="currentColor" d="M24 2H8a2 2 0 0 0-2 2v26l10-5.054L26 30V4a2 2 0 0 0-2-2" />
+                        </svg>
                     </h3>
                 </div>
 

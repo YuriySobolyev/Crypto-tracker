@@ -99,11 +99,21 @@ function CryptoTable({showOnlyFavorites, activeTab, selectedId, onSelect}) {
                                         border: "none",
                                         fontSize: "1rem",
                                         cursor: "pointer",
-                                        color: isFavorite(crypto.id) ? "gold" : "#ccc",
+                                        // color: isFavorite(crypto.id) ? "gold" : "#ccc",
+                                        color: crypto.changePercent24Hr >= 0 ? "#56e372" : "#e65c5c",
                                     }}
                                     title="Toggle favorite"
                                 >
-                                    {isFavorite(crypto.id) ? "★" : "☆"}
+                                    {/*{isFavorite(crypto.id) ? "★" : "☆"}*/}
+                                    {isFavorite(crypto.id) ? (
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 32 32">
+                                            <path fill="currentColor" d="M24 2H8a2 2 0 0 0-2 2v26l10-5.054L26 30V4a2 2 0 0 0-2-2" />
+                                        </svg>
+                                    ) : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 32 32">
+                                            <path fill="currentColor" d="M24 4v22.75l-7.1-3.59l-.9-.45l-.9.45L8 26.75V4zm0-2H8a2 2 0 0 0-2 2v26l10-5l10 5V4a2 2 0 0 0-2-2" />
+                                        </svg>
+                                    )}
                                 </button>
                             </li>
                         </ul>
